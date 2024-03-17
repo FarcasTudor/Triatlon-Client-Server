@@ -1,0 +1,84 @@
+syntax="proto3";
+package triatlon.protocol;
+
+option java_package = "protobuffprotocol";
+option java_outer_classname = "TriatlonProtobufs";
+
+message Arbitru {
+    int64 id = 1;
+    string nume = 2;
+    string prenume = 3;
+    string username = 4;
+    string parola = 5;
+}
+
+message Inscriere {
+    int64 id = 1;
+    int64 idParticipant = 2;
+    int64 idProba = 3;
+    int64 punctaj = 4;
+}
+
+message Participant {
+    int64 id = 1;
+    string nume = 2;
+    string prenume = 3;
+}
+
+message ParticipantDTO {
+    int64 id = 1;
+    string nume = 2;
+    string prenume = 3;
+    int64 punctaj = 4;
+}
+
+message Proba {
+    int64 id = 1;
+    string numeProba = 2;
+    int64 idArbitru = 3;
+}
+
+message ArbitruDTO {
+    string username = 2;
+    string parola = 3;
+}
+
+message TriatlonRequest {
+    enum Type {
+        UNKNOWN = 0; LOGIN = 1; LOGOUT = 2;
+        GET_ARBITRU = 3;
+        ADD_INSCRIERE = 4;
+        GET_PROBE = 5;
+        GET_PARTICIPANTI_CU_PUNCTAJ = 6;
+        GET_PARTICIPANTI_DE_LA_PROBA = 7;
+    }
+    Type type = 1;
+    oneof payload {
+        Arbitru arbitru = 2;
+        Inscriere inscriere = 3;
+        Proba proba = 4;
+        Participant participant = 5;
+        ArbitruDTO arbitruDTO = 6;
+    }
+}
+
+message TriatlonResponse {
+    enum Type {
+        UNKNOWN = 0; OK = 1; ERROR = 2;
+        TAKE_ARBITRU = 3;
+        TAKE_PROBE = 4;
+        UPDATE_PUNCTAJ = 5;
+        TAKE_PARTICIPANTI_CU_PUNCTAJ = 6;
+        TAKE_PARTICIPANTI_DE_LA_PROBA = 7;
+    }
+    Type type = 1;
+
+    string error = 2;
+    Arbitru arbitru = 3;
+    repeated Inscriere inscrieri = 4;
+    repeated ParticipantDTO participantiDTO = 5;
+    repeated Proba probe = 6;
+    repeated Participant participanti = 7;
+    Inscriere inscriere = 8;
+    ArbitruDTO arbitruDTO = 9;
+}

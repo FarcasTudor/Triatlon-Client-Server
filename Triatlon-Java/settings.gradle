@@ -1,0 +1,11 @@
+rootProject.name = "LAB3"
+include 'TriatlonModel'
+include 'TriatlonClientFX'
+include 'TriatlonPersistance'
+include 'TriatlonService'
+include 'TriatlonServices'
+include 'TriatlonServer'
+include 'TriatlonNetworking'
+include 'Rest'
+include 'Rest'
+
